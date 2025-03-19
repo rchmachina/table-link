@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package users;
+option go_package = "proto/users";
+
+service UserService {
+  rpc GetAllUsers (Empty) returns (UserListResponse);
+  rpc CreateUser (CreateUserRequest) returns (UserResponse);
+  rpc UpdateUser (UpdateUserRequest) returns (UserResponse);
+  rpc DeleteUser (DeleteUserRequest) returns (UserResponse);
+}
+
+message Empty {}
+
+message User {
+  string role_id = 1;
+  string role_name = 2;
+  string name = 3;
+  string email = 4;
+  string last_access = 5;
+}
+
+message UserListResponse {
+  bool status = 1;
+  string message = 2;
+  repeated User users = 3;
+}
+
+message CreateUserRequest {
+  string role_id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message UpdateUserRequest {
+  string user_id = 1;
+  string name = 2;
+}
+
+message DeleteUserRequest {
+  string user_id = 1;
+}
+
+message UserResponse {
+  bool status = 1;
+  string message = 2;
+}
